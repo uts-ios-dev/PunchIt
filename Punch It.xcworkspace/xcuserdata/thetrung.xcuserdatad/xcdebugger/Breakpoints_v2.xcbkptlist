@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Punch It/AuthenticationViewController.swift"
+            timestampString = "580441720.467785"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "AuthenticationViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Punch_It.AuthenticationViewController.pinField.getter : weak Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "Punch It"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thetrung/Desktop/Punch%20It%20Project/Punch%20It/AuthenticationViewController.swift"
+                  timestampString = "580441198.00369"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "86">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Punch_It.AuthenticationViewController.pinField.setter : weak Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "Punch It"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thetrung/Desktop/Punch%20It%20Project/Punch%20It/AuthenticationViewController.swift"
+                  timestampString = "580441198.007818"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "106">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Punch_It.AuthenticationViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Punch_It.AuthenticationViewController"
+                  moduleName = "Punch It"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thetrung/Desktop/Punch%20It%20Project/Punch%20It/AuthenticationViewController.swift"
+                  timestampString = "580441198.010388"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "1574">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Punch_It.AuthenticationViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Punch_It.AuthenticationViewController&gt;"
+                  moduleName = "Punch It"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thetrung/Desktop/Punch%20It%20Project/Punch%20It/AuthenticationViewController.swift"
+                  timestampString = "580441198.01238"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "1546">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
