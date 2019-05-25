@@ -19,23 +19,32 @@ class AuthenticationViewController: UIViewController {
     let ref = Database.database().reference()
     var model = Model()
     var staff: [Staff] = []
-    var dictionary = ["13009": "Trung", "13457": "Minh", "13478": "Harry"]
+    var dictionary:[String:String] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
-        Database.database().reference().child("Users").observe(DataEventType.value, with: {(snapshot) in
+        ref.child("Users").observe(DataEventType.value, with: {(snapshot) in
             let ID  = snapshot.value as? [String: AnyObject] ?? [:]
             self.savedPIN = Array(ID.keys)
+            self.fetchUserName()
         })
-       
-        
+    }
+    
+    
+    func fetchUserName(){
+        for i in self.savedPIN{
+            ref.child("Users").child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
+                let value = snapshot.value as? NSDictionary
+                let name = value?["Name"] as? String ?? ""
+                self.savedName.append(name)
+        })
+        }
     }
     //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     //        if segue.identifier == "confirm"
     //        {
     //            let tabBar = segue.destination as! TabBarController
     //            let destinationVC = tabBar.viewControllers![0] as! ViewController
-    //            getName = dictionary[pinField.text!]
-    //            destinationVC.name.append(getName)
+    //                //            destinationVC.name.append(getName)
     //            let staff = Staff(self.pinField.text!, getName)
     //            destinationVC.staff.append(staff)
     //        }
@@ -45,27 +54,25 @@ class AuthenticationViewController: UIViewController {
         if pinField.text! == "1111" {
             performSegue(withIdentifier: "manageSegue", sender: nil)
         }
+        
+        for (key, value) in self.savedPIN.enumerated(){
+            self.dictionary[value] = self.savedName[key]
+        }
         for i in savedPIN{
             if i == pinField.text!
             {
-                performSegue(withIdentifier: "confirm", sender: nil)
-                ref.child("Users").child(pinField.text!).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
-                    //                let name = snapshot.value as? [String: String]
-                    let value = snapshot.value as? NSDictionary
-                    let name = value?["Name"] as? String ?? ""
-                    //                let tabBar = TabBarController()
-                    let newShift = Staff(self.pinField.text!, name)
-                    self.staff.append(newShift)
-                    //                let homeVC = tabBar.viewControllers![0] as! ViewController
-                    //                tabBar.staff.append(staff)
-                    //                print("inside  \(self.savedName)")
-                    
-                })
+                getName = dictionary[pinField.text!]
+                let newShift = Staff(self.pinField.text!, getName)
+                self.staff.append(newShift)
+            }
+              
             }
             
-        }
-        //       print(self.savedPIN)
-        print("outside  \(self.savedName)")
+        print(staff.count)
+       
+        print(self.savedPIN)
+        print(self.savedName)
+        
     }
     
     /*

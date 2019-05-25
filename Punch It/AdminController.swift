@@ -10,19 +10,22 @@ import UIKit
 import FirebaseDatabase
 class AdminController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var savedPIN:[String] = []
+    var savedName:[String] = []
+    var savedHours:[String] = []
+    let ref = Database.database().reference()
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return savedPIN.count
+        return savedHours.count
     }
     
     @IBOutlet weak var myTableView: UITableView!
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
-         cell.textLabel?.text = savedPIN[indexPath.row]
+        cell.textLabel?.text = "\(savedName[indexPath.row])     \(savedHours[indexPath.row])"
         return cell
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         myTableView.reloadData()
-       
     }
    
     override func viewDidLoad() {
@@ -30,20 +33,35 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
         Database.database().reference().child("Users").observe(DataEventType.value, with: {(snapshot) in
             let ID  = snapshot.value as? [String: AnyObject] ?? [:]
             self.savedPIN = Array(ID.keys)
-            let savedData = Array(ID.values)
-            print(savedData)
+            self.fetchUserName()
+            self.fetchWorkHours()
         })
-//        Database.database().reference().child("Users").observe(.value, with: {(snapshot) in
-//            let name  = snapshot.value as? [String: AnyObject] ?? [:]
-////            self.savedPIN = Array(name.keys)
-//            let value = snapshot.value as? NSDictionary
-//            let username = name["Name"] as? String ?? ""
-//            print(username)
-////            print("ad")
-//        })
-        
     }
     
+    func fetchUserName(){
+        for i in self.savedPIN{
+            ref.child("Users").child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
+                let value = snapshot.value as? NSDictionary
+                let name = value?["Name"] as? String ?? ""
+                self.savedName.append(name)
+            })
+        }
+    }
+    
+    func fetchWorkHours(){
+        for i in self.savedPIN
+        {
+            ref.child("Work").child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
+                let value = snapshot.value as? NSDictionary
+                for j in self.savedName{
+                let time = value?[j] as? String ?? ""
+                    if time != ""{
+                self.savedHours.append(time)
+                }
+                }
+            })
+        }
+    }
 
     /*
     // MARK: - Navigation
