@@ -29,6 +29,7 @@ class AuthenticationViewController: UIViewController {
         })
     }
     
+   
     
     func fetchUserName(){
         for i in self.savedPIN{
@@ -73,7 +74,14 @@ class AuthenticationViewController: UIViewController {
         print(self.savedName)
         
     }
-    
+    @IBAction func stopButton(_ sender: Any) {
+        for i in savedPIN{
+            if i == pinField.text!{
+                ref.child("LiveShift").child(pinField.text!).removeValue()
+                performSegue(withIdentifier: "confirm", sender: nil)
+            }
+    }
+    }
     /*
      // MARK: - Navigation
      

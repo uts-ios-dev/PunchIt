@@ -16,20 +16,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var myTableView: UITableView!
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "endShift"{
-//            let destination = segue.destination as! AuthenticationViewController
-//            destination.screenLabel.text = "End Shift"
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "endShift"{
+////            let destination = segue.destination as! AuthenticationViewController
+////            destination.screenLabel.text = "End Shift"
+//        }
+//    }
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCell.EditingStyle.delete
-        {
-            self.savedName.remove(at: indexPath.row)
-            performSegue(withIdentifier: "endShift", sender: nil)
             myTableView.reloadData()
+            performSegue(withIdentifier: "endShift", sender: nil)
         }
-    }
+
     override func viewDidAppear(_ animated: Bool) {
         myTableView.reloadData()
     }
