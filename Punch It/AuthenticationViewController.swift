@@ -54,19 +54,18 @@ class AuthenticationViewController: UIViewController {
         if pinField.text! == "1111" {
             performSegue(withIdentifier: "manageSegue", sender: nil)
         }
-        
         for (key, value) in self.savedPIN.enumerated(){
             self.dictionary[value] = self.savedName[key]
         }
         for i in savedPIN{
-            if i == pinField.text!
-            {
+            if i == pinField.text!{
                 getName = dictionary[pinField.text!]
                 let newShift = Staff(self.pinField.text!, getName)
                 self.staff.append(newShift)
+                ref.child("LiveShift").child(pinField.text!).setValue(["Working": getName])
+                performSegue(withIdentifier: "confirm", sender: nil)
             }
-              
-            }
+}
             
         print(staff.count)
        
