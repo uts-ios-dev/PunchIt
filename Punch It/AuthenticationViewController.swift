@@ -10,8 +10,9 @@ import UIKit
 import FirebaseUI
 import FirebaseDatabase
 class AuthenticationViewController: UIViewController {
-    //    @IBOutlet weak var label: UILabel!
-//    @IBOutlet weak var screenLabel: UILabel!
+    let formatterDay = DateFormatter()
+    var newString: String = ""
+    var newTime: String = ""
     var savedPIN:[String] = []
     var savedName:[String] = []
     var savedManage = "1111"
@@ -27,9 +28,19 @@ class AuthenticationViewController: UIViewController {
             self.savedPIN = Array(ID.keys)
             self.fetchUserName()
         })
+      
+ 
+       
     }
     
-   
+    func dateFormatter(_ : Date){
+        formatterDay.dateFormat = "dd-MM-yyyyHH:mm"
+        let nowDay  = formatterDay.string(from: Date())
+        let index = nowDay.index(nowDay.startIndex, offsetBy: 10)
+        let endIndex = nowDay.index(nowDay.endIndex, offsetBy: -5)
+        self.newString = String(nowDay[..<index])
+        self.newTime = String(nowDay[endIndex...])
+    }
     
     func fetchUserName(){
         for i in self.savedPIN{
@@ -40,16 +51,7 @@ class AuthenticationViewController: UIViewController {
         })
         }
     }
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        if segue.identifier == "confirm"
-    //        {
-    //            let tabBar = segue.destination as! TabBarController
-    //            let destinationVC = tabBar.viewControllers![0] as! ViewController
-    //                //            destinationVC.name.append(getName)
-    //            let staff = Staff(self.pinField.text!, getName)
-    //            destinationVC.staff.append(staff)
-    //        }
-    //    }
+   
     @IBOutlet weak var pinField: UITextField!
     @IBAction func confirmTapped(_ sender: Any) {
         if pinField.text! == "1111" {
@@ -61,23 +63,19 @@ class AuthenticationViewController: UIViewController {
         for i in savedPIN{
             if i == pinField.text!{
                 getName = dictionary[pinField.text!]
-                let newShift = Staff(self.pinField.text!, getName)
-                self.staff.append(newShift)
                 ref.child("LiveShift").child(pinField.text!).setValue(["Working": getName])
+                dateFormatter(Date())
+                ref.child("AccessLog").child("Login").child(pinField.text!).child(newString).setValue(["Time": newTime])
                 performSegue(withIdentifier: "confirm", sender: nil)
             }
-}
-            
-        print(staff.count)
-       
-        print(self.savedPIN)
-        print(self.savedName)
-        
+        }
     }
     @IBAction func stopButton(_ sender: Any) {
         for i in savedPIN{
             if i == pinField.text!{
                 ref.child("LiveShift").child(pinField.text!).removeValue()
+                dateFormatter(Date())
+                ref.child("AccessLog").child("Logout").child(pinField.text!).child(newString).setValue(["Time": newTime])
                 performSegue(withIdentifier: "confirm", sender: nil)
             }
     }

@@ -26,4 +26,7 @@ class Staff{
     func stop(){
         timer.invalidate();
     }
+    func getCounter() -> Int {
+        return counter
+    }
 }

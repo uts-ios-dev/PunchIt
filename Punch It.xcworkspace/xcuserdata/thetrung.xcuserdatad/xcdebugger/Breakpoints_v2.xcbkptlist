@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Punch It/AuthenticationViewController.swift"
-            timestampString = "580460343.2096111"
+            timestampString = "580566247.627864"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "AuthenticationViewController"
             landmarkType = "3">
             <Locations>
