@@ -9,6 +9,11 @@
 import UIKit
 import FirebaseDatabase
 class AdminController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet weak var datePicker: UIDatePicker!
+
+    
+    
     var savedPIN:[String] = []
     var savedName:[String] = []
     var savedHours:[String] = []
@@ -53,12 +58,12 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
         {
             ref.child("Work").child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
                 let value = snapshot.value as? NSDictionary
-                for j in self.savedName{
-                let time = value?[j] as? String ?? ""
-                    if time != ""{
+//                for j in self.savedName{
+                let time = value?["Time"] as? String ?? ""
+//                    if time != ""{
                 self.savedHours.append(time)
-                }
-                }
+//                }
+//                }
             })
         }
     }
