@@ -23,8 +23,7 @@ class AuthenticationViewController: UIViewController {
     var loginMinutes: Int = 0
 
     let ref = Database.database().reference()
-    var model = Model()
-    var staff: [Staff] = []
+  
     var dictionary:[String:String] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +32,6 @@ class AuthenticationViewController: UIViewController {
             self.savedPIN = Array(ID.keys)
             self.fetchUserName()
         })
-      
- 
-       
     }
     
     func dateFormatter(_ : Date){
@@ -61,8 +57,8 @@ class AuthenticationViewController: UIViewController {
         let endIndex = time.index(time.endIndex, offsetBy: -2)
         self.hours = (String(time[..<index]) as NSString).integerValue
         self.minutes = (String(time[endIndex...]) as NSString).integerValue
-    
     }
+    
     func calculateWorkingHours(_ time: String){
         let index = time.index(time.startIndex, offsetBy: 2)
         let endIndex = time.index(time.endIndex, offsetBy: -2)

@@ -12,7 +12,7 @@ import FirebaseUI
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var savedName:[String] = []
     var savedPIN:[String] = []
-    var staff: [Staff] = []
+    
     
     @IBOutlet weak var myTableView: UITableView!
     
@@ -51,7 +51,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         })
         
 //       ref.child("Users").child("13456").setValue(["name": "Trung"])
-       print(staff.count)
+       
       
         // Do any additional setup after loading the view, typically from a nib.
     }

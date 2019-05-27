@@ -10,8 +10,9 @@ import UIKit
 import FirebaseDatabase
 class AdminController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak var datePicker: UIDatePicker!
+    var datePicker: UIDatePicker?
 
+    @IBOutlet weak var dateField: UITextField!
     
     
     var savedPIN:[String] = []
@@ -41,6 +42,23 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
             self.fetchUserName()
             self.fetchWorkHours()
         })
+        datePicker = UIDatePicker()
+        datePicker?.datePickerMode = .date
+        datePicker?.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+        dateField.inputView = datePicker
+        datePicker?.resignFirstResponder()
+        if dateField.text == ""{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        dateField.text = dateFormatter.string(from: Date())
+    }
+    }
+    @objc func datePickerValueChanged(_ sender: UIDatePicker){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        dateField.text = dateFormatter.string(from: sender.date)
+        self.view.endEditing(true)
+        self.viewDidLoad()
     }
     
     func fetchUserName(){
@@ -56,7 +74,7 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
     func fetchWorkHours(){
         for i in self.savedPIN
         {
-            ref.child("Work").child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
+            ref.child("Work").child(dateField.text!).child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
                 let value = snapshot.value as? NSDictionary
 //                for j in self.savedName{
                 let time = value?["Time"] as? String ?? ""
