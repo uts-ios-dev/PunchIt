@@ -11,14 +11,13 @@ import FirebaseDatabase
 class AdminController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var datePicker: UIDatePicker?
-
     @IBOutlet weak var dateField: UITextField!
-    
     
     var savedPIN:[String] = []
     var savedName:[String] = []
     var savedHours:[String] = []
     let ref = Database.database().reference()
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return savedHours.count
     }
@@ -26,7 +25,7 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
     @IBOutlet weak var myTableView: UITableView!
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
-        cell.textLabel?.text = "\(savedName[indexPath.row])     \(savedHours[indexPath.row])"
+        cell.textLabel?.text = "\(savedName[indexPath.row]) worked \(savedHours[indexPath.row])"
         return cell
     }
     
@@ -36,6 +35,12 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        dateField.addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
+        dateField.addTarget(self, action: #selector(textFieldDidEndEditing), for: .editingDidEnd)
+     
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         Database.database().reference().child("Users").observe(DataEventType.value, with: {(snapshot) in
             let ID  = snapshot.value as? [String: AnyObject] ?? [:]
             self.savedPIN = Array(ID.keys)
@@ -48,17 +53,44 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
         dateField.inputView = datePicker
         datePicker?.resignFirstResponder()
         if dateField.text == ""{
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        dateField.text = dateFormatter.string(from: Date())
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy"
+            dateField.text = dateFormatter.string(from: Date())
+        }
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
+            cell.textLabel?.text = "\(savedName[indexPath.row]) worked \(savedHours[indexPath.row])"
+            return cell
+        }
+        
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return savedHours.count
+        }
+        
+        
     }
+    
+    @objc func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.savedHours.removeAll()
+        self.savedName.removeAll()
+        self.myTableView.reloadData()
     }
+    
+    @objc func textFieldDidEndEditing(_ textField: UITextField) {
+        self.fetchUserName()
+        self.fetchWorkHours()
+        self.myTableView.reloadData()
+        
+    }
+    
     @objc func datePickerValueChanged(_ sender: UIDatePicker){
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         dateField.text = dateFormatter.string(from: sender.date)
         self.view.endEditing(true)
-        self.viewDidLoad()
+//        self.viewWillDisappear(true)
+        self.viewWillAppear(true)
+       
     }
     
     func fetchUserName(){
@@ -76,12 +108,9 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
         {
             ref.child("Work").child(dateField.text!).child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
                 let value = snapshot.value as? NSDictionary
-//                for j in self.savedName{
                 let time = value?["Time"] as? String ?? ""
-//                    if time != ""{
                 self.savedHours.append(time)
-//                }
-//                }
+                print(time)
             })
         }
     }
