@@ -12,8 +12,6 @@ import FirebaseUI
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var savedName:[String] = []
     var savedPIN:[String] = []
-    
-    
     @IBOutlet weak var myTableView: UITableView!
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

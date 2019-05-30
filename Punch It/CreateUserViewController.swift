@@ -14,12 +14,19 @@ class CreateUserViewController: UIViewController {
     @IBOutlet weak var initialPIN: UITextField!
     @IBOutlet weak var staffName: UITextField!
     @IBOutlet weak var role: UITextField!
-    let ref = Database.database().reference()
+    var backToManageTask: Bool = false;
+ 
    
     override func viewDidLoad() {
         super.viewDidLoad()
 
 //         Do any additional setup after loading the view.
+    }
+    @IBAction func backButtonTapped(_ sender: Any) {
+        if backToManageTask == true {
+            performSegue(withIdentifier: "backManageTask", sender: nil)
+        }
+        performSegue(withIdentifier: "backShiftView", sender: nil)
     }
     @IBAction func okay(_ sender: Any) {
     if (phoneNumber.text! != "" && address.text! != "" && initialPIN.text! != "" && staffName.text! != "" && role.text! != "" ){
@@ -27,7 +34,7 @@ class CreateUserViewController: UIViewController {
                     "Address": address.text!,
                     "PhoneNumber": phoneNumber.text!,
                     "Role": role.text!]
-        ref.child("Users").child(initialPIN.text!).setValue(user)
+        Database.database().reference().child("Users").child(initialPIN.text!).setValue(user)
     }
 }
 //    @IBAction func addStaff(_ sender: Any) {

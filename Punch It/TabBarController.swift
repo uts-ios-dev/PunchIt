@@ -9,11 +9,10 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-//    var staff: [Staff] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
-//        print(staff)
-        // Do any additional setup after loading the view.
+       // Do any additional setup after loading the view.
     }
     
 

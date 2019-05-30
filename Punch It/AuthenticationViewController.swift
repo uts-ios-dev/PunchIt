@@ -99,7 +99,7 @@ class AuthenticationViewController: UIViewController {
             self.parseIntEndTime(self.currentTime)
             let workingHour = self.endHours - self.loginHour
             let workingMinutes = abs(self.endMinutes - self.loginMinutes)
-            self.ref.child("Work").child(self.pinField.text!).setValue(["Time": "\(workingHour)h \(workingMinutes)min"])
+            self.ref.child("Work").child(self.currentDate).child(self.pinField.text!).setValue(["Time": "\(workingHour)h \(workingMinutes)min"])
         })
     }
     

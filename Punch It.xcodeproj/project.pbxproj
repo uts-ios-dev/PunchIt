@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		2043D25B2294148100B6D1B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2043D25A2294148100B6D1B5 /* GoogleService-Info.plist */; };
 		2043D2632295039500B6D1B5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2043D2622295039500B6D1B5 /* TabBarController.swift */; };
-		20C01BDE2297CBF000B9B5B9 /* AdminController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C01BDD2297CBF000B9B5B9 /* AdminController.swift */; };
+		20963930229F4C0B00F14692 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2096392F229F4C0B00F14692 /* Main.storyboard */; };
 		20C01BE0229800A100B9B5B9 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C01BDF229800A100B9B5B9 /* CreateUserViewController.swift */; };
 		20C01BE42298210600B9B5B9 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C01BE32298210600B9B5B9 /* SuccessViewController.swift */; };
 		20C01BE62298D1B200B9B5B9 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C01BE52298D1B200B9B5B9 /* AuthenticationViewController.swift */; };
-		20C01BE82298D38500B9B5B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20C01BE72298D38500B9B5B9 /* Main.storyboard */; };
+		20EA1523229E9B58009B887A /* ManageTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA1522229E9B58009B887A /* ManageTaskViewController.swift */; };
+		20EA1529229ECAC4009B887A /* AdminController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA1528229ECAC4009B887A /* AdminController.swift */; };
 		2E76DDCF1238349DCE250461 /* Pods_Punch_ItUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66DF32F81DAB18648F59FA12 /* Pods_Punch_ItUITests.framework */; };
 		6C05AC4522939D700045EB82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C05AC4422939D700045EB82 /* AppDelegate.swift */; };
 		6C05AC4722939D700045EB82 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C05AC4622939D700045EB82 /* ViewController.swift */; };
@@ -46,11 +47,12 @@
 		1B9E58E8C61FAFA6F00ACAA1 /* Pods_Punch_ItTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Punch_ItTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2043D25A2294148100B6D1B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2043D2622295039500B6D1B5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		20C01BDD2297CBF000B9B5B9 /* AdminController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminController.swift; sourceTree = "<group>"; };
+		2096392F229F4C0B00F14692 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../Main.storyboard; sourceTree = "<group>"; };
 		20C01BDF229800A100B9B5B9 /* CreateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
 		20C01BE32298210600B9B5B9 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		20C01BE52298D1B200B9B5B9 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
-		20C01BE72298D38500B9B5B9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../Main.storyboard; sourceTree = "<group>"; };
+		20EA1522229E9B58009B887A /* ManageTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageTaskViewController.swift; sourceTree = "<group>"; };
+		20EA1528229ECAC4009B887A /* AdminController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminController.swift; sourceTree = "<group>"; };
 		2ABFC96805785202FC813D5E /* Pods-Punch ItUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Punch ItUITests.release.xcconfig"; path = "Target Support Files/Pods-Punch ItUITests/Pods-Punch ItUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3F24743671779833835F6A0F /* Pods-Punch ItTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Punch ItTests.debug.xcconfig"; path = "Target Support Files/Pods-Punch ItTests/Pods-Punch ItTests.debug.xcconfig"; sourceTree = "<group>"; };
 		53F4568F29B5C2930CF0A807 /* Pods-Punch ItTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Punch ItTests.release.xcconfig"; path = "Target Support Files/Pods-Punch ItTests/Pods-Punch ItTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -129,12 +131,13 @@
 				6C05AC4422939D700045EB82 /* AppDelegate.swift */,
 				20C01BE52298D1B200B9B5B9 /* AuthenticationViewController.swift */,
 				6C05AC4622939D700045EB82 /* ViewController.swift */,
+				20EA1528229ECAC4009B887A /* AdminController.swift */,
 				2043D2622295039500B6D1B5 /* TabBarController.swift */,
 				20C01BDF229800A100B9B5B9 /* CreateUserViewController.swift */,
-				20C01BDD2297CBF000B9B5B9 /* AdminController.swift */,
 				20C01BE32298210600B9B5B9 /* SuccessViewController.swift */,
-				20C01BE72298D38500B9B5B9 /* Main.storyboard */,
+				20EA1522229E9B58009B887A /* ManageTaskViewController.swift */,
 				6C05AC4B22939D710045EB82 /* Assets.xcassets */,
+				2096392F229F4C0B00F14692 /* Main.storyboard */,
 				6C05AC4D22939D710045EB82 /* LaunchScreen.storyboard */,
 				2043D25A2294148100B6D1B5 /* GoogleService-Info.plist */,
 				6C05AC5022939D710045EB82 /* Info.plist */,
@@ -292,10 +295,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20C01BE82298D38500B9B5B9 /* Main.storyboard in Resources */,
 				6C05AC4F22939D710045EB82 /* LaunchScreen.storyboard in Resources */,
 				2043D25B2294148100B6D1B5 /* GoogleService-Info.plist in Resources */,
 				6C05AC4C22939D710045EB82 /* Assets.xcassets in Resources */,
+				20963930229F4C0B00F14692 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,7 +446,8 @@
 				20C01BE62298D1B200B9B5B9 /* AuthenticationViewController.swift in Sources */,
 				2043D2632295039500B6D1B5 /* TabBarController.swift in Sources */,
 				20C01BE0229800A100B9B5B9 /* CreateUserViewController.swift in Sources */,
-				20C01BDE2297CBF000B9B5B9 /* AdminController.swift in Sources */,
+				20EA1523229E9B58009B887A /* ManageTaskViewController.swift in Sources */,
+				20EA1529229ECAC4009B887A /* AdminController.swift in Sources */,
 				6C05AC4522939D700045EB82 /* AppDelegate.swift in Sources */,
 				20C01BE42298210600B9B5B9 /* SuccessViewController.swift in Sources */,
 			);
