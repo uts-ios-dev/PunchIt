@@ -17,4 +17,5 @@ enum pathName: String {
     case time = "Time"
     case work = "Work"
     case name = "Name"
+    case role = "Role"
 }

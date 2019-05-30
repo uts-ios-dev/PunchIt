@@ -13,6 +13,7 @@
 		20963933229F762400F14692 /* SegueEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20963932229F762400F14692 /* SegueEnum.swift */; };
 		20963935229F772E00F14692 /* DateFormatEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20963934229F772E00F14692 /* DateFormatEnum.swift */; };
 		20963937229F8A0B00F14692 /* PathNameEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20963936229F8A0B00F14692 /* PathNameEnum.swift */; };
+		2096393B229FD1E400F14692 /* ViewStaffController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096393A229FD1E400F14692 /* ViewStaffController.swift */; };
 		20C01BE0229800A100B9B5B9 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C01BDF229800A100B9B5B9 /* CreateUserViewController.swift */; };
 		20C01BE42298210600B9B5B9 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C01BE32298210600B9B5B9 /* SuccessViewController.swift */; };
 		20C01BE62298D1B200B9B5B9 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C01BE52298D1B200B9B5B9 /* AuthenticationViewController.swift */; };
@@ -54,6 +55,7 @@
 		20963932229F762400F14692 /* SegueEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueEnum.swift; sourceTree = "<group>"; };
 		20963934229F772E00F14692 /* DateFormatEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatEnum.swift; sourceTree = "<group>"; };
 		20963936229F8A0B00F14692 /* PathNameEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathNameEnum.swift; sourceTree = "<group>"; };
+		2096393A229FD1E400F14692 /* ViewStaffController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStaffController.swift; sourceTree = "<group>"; };
 		20C01BDF229800A100B9B5B9 /* CreateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
 		20C01BE32298210600B9B5B9 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		20C01BE52298D1B200B9B5B9 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				6C05AC4622939D700045EB82 /* ViewController.swift */,
 				20EA1528229ECAC4009B887A /* AdminController.swift */,
 				2043D2622295039500B6D1B5 /* TabBarController.swift */,
+				2096393A229FD1E400F14692 /* ViewStaffController.swift */,
 				20C01BDF229800A100B9B5B9 /* CreateUserViewController.swift */,
 				20963931229F749600F14692 /* Enum */,
 				20C01BE32298210600B9B5B9 /* SuccessViewController.swift */,
@@ -470,6 +473,7 @@
 				20EA1529229ECAC4009B887A /* AdminController.swift in Sources */,
 				6C05AC4522939D700045EB82 /* AppDelegate.swift in Sources */,
 				20C01BE42298210600B9B5B9 /* SuccessViewController.swift in Sources */,
+				2096393B229FD1E400F14692 /* ViewStaffController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
