@@ -15,7 +15,7 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
     var savedName = [String]()
     var savedPIN = [String]()
     var savedHours = [String]()
-    var date: String = ""
+    var date: String = "30-05-2019"
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var dateLabel: UILabel!
     
@@ -23,7 +23,8 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
             return savedName.count
         }
 
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    //Print data to the table 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
             if (savedHours[indexPath.row] != ""){
             cell.textLabel?.text = "\(savedName[indexPath.row]) has worked \(savedHours[indexPath.row])"
@@ -47,37 +48,25 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
         })
         dateLabel.text = date
 }
-    
+    //Fetch the user's name from databse
     func fetchUserName(){
         for i in self.savedPIN{
            Database.database().reference().child(pathName.users.rawValue).child(i).observeSingleEvent(of: .value, with: {(snapshot) in
                 let value = snapshot.value as? NSDictionary
                 let name = value?[pathName.name.rawValue] as? String ?? ""
                 self.savedName.append(name)
-                print(self.savedName)
             })
         }
     }
-
+    
+    //Fetch the work's hour from Firebase
     func fetchWorkHours(){
         for i in self.savedPIN{
             Database.database().reference().child(pathName.work.rawValue).child(date).child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
                 let value = snapshot.value as? NSDictionary
                 let time = value?[pathName.time.rawValue] as? String ?? ""
                 self.savedHours.append(time)
-               print(self.savedHours)
             })
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

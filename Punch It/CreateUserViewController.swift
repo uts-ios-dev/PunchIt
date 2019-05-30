@@ -20,10 +20,9 @@ class CreateUserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//         Do any additional setup after loading the view.
     }
     
+    //Function to control the back button
     @IBAction func backButtonTapped(_ sender: Any) {
         if backToManageTask == true {
             performSegue(withIdentifier: SegueName.backManageTask.rawValue, sender: nil)
@@ -31,6 +30,7 @@ class CreateUserViewController: UIViewController {
         performSegue(withIdentifier: SegueName.toShiftView.rawValue, sender: nil)
     }
     
+    //Function to create new user
     @IBAction func okay(_ sender: Any) {
         helperText.text = "Please fill in all the field"
     if (phoneNumber.text! != "" && address.text! != "" && initialPIN.text! != "" && staffName.text! != "" && role.text! != "" ){
@@ -44,14 +44,5 @@ class CreateUserViewController: UIViewController {
    
 }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

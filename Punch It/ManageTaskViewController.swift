@@ -11,8 +11,9 @@ import UIKit
 class ManageTaskViewController: UIViewController {
     var datePicker: UIDatePicker?
     @IBOutlet weak var dateField: UITextField!
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    //Create date picker for the keyboard
+    fileprivate func addDatePickerKeyboard() {
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .date
         datePicker?.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
@@ -23,21 +24,28 @@ class ManageTaskViewController: UIViewController {
             dateFormatter.dateFormat = dateFormatEnum.dateOnly.rawValue
             dateField.text = dateFormatter.string(from: Date())
         }
-        // Do any additional setup after loading the view.
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addDatePickerKeyboard()
+    }
+    
+    //Perform segue to addStaff scene
     @IBAction func addStaffTapped(_ sender: Any) {
          performSegue(withIdentifier: SegueName.toCreateStaff.rawValue, sender: nil)
     }
 
+    
     @objc func datePickerValueChanged(_ sender: UIDatePicker){
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormatEnum.dateOnly.rawValue
         dateField.text = dateFormatter.string(from: sender.date)
         self.view.endEditing(true)
         self.viewWillAppear(true)
-        
     }
     
+    //Perform preparation for each segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueName.toViewStaff.rawValue{
             let destination = segue.destination as! AdminController
@@ -49,6 +57,7 @@ class ManageTaskViewController: UIViewController {
     }
         
 }
+    
     @IBAction func viewTapped(_ sender: Any) {
         performSegue(withIdentifier: SegueName.toViewStaff.rawValue, sender: nil)
     }

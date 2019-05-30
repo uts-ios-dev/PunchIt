@@ -21,10 +21,10 @@ class AuthenticationViewController: UIViewController {
     var endMinutes: Int = 0
     var loginHour: Int = 0
     var loginMinutes: Int = 0
-
     let ref = Database.database().reference()
-  
     var dictionary:[String:String] = [:]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ref.child(pathName.users.rawValue).observe(DataEventType.value, with: {(snapshot) in
@@ -33,7 +33,7 @@ class AuthenticationViewController: UIViewController {
             self.fetchUserName()
         })
     }
-    
+    //Date formatter to convert Date to String
     func dateFormatter(_ : Date){
         formatterDay.dateFormat = dateFormatEnum.dateAndTime.rawValue
         let nowDay  = formatterDay.string(from: Date())
@@ -43,6 +43,7 @@ class AuthenticationViewController: UIViewController {
         self.currentTime = String(nowDay[endIndex...])
     }
     
+    //Fetech the user's name from Firebase
     func fetchUserName(){
         for i in self.savedPIN{
             ref.child(pathName.users.rawValue).child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
@@ -52,7 +53,7 @@ class AuthenticationViewController: UIViewController {
         })
         }
     }
-    
+    //Parse the end time to calculate work hour
     func parseIntEndTime(_ time: String){
         let index = time.index(time.startIndex, offsetBy: 2)
         let endIndex = time.index(time.endIndex, offsetBy: -2)
@@ -60,6 +61,7 @@ class AuthenticationViewController: UIViewController {
         self.endMinutes = (String(time[endIndex...]) as NSString).integerValue
     }
     
+    //Parse the login time to calculate work hour
     func parseIntLoginTime(_ time: String){
         let index = time.index(time.startIndex, offsetBy: 2)
         let endIndex = time.index(time.endIndex, offsetBy: -2)
@@ -67,6 +69,7 @@ class AuthenticationViewController: UIViewController {
         self.loginMinutes = (String(time[endIndex...]) as NSString).integerValue
     }
     
+    //Perform validation for the control the login
     @IBOutlet weak var pinField: UITextField!
     fileprivate func validation() {
         getName = dictionary[pinField.text!]
@@ -91,6 +94,7 @@ class AuthenticationViewController: UIViewController {
         pinField.placeholder = "Incorrect PIN"
     }
     
+    //Calculate work hour based on the end time and the current time
     fileprivate func calculateWorkHour() {
         ref.child(pathName.liveShift.rawValue).child(pinField.text!).removeValue()
         dateFormatter(Date())
@@ -106,6 +110,7 @@ self.ref.child(pathName.work.rawValue).child(self.currentDate).child(self.pinFie
         })
     }
     
+    //Function to end shift
     @IBAction func stopButton(_ sender: Any) {
         for i in savedPIN{
             if i == pinField.text!{
@@ -115,13 +120,5 @@ self.ref.child(pathName.work.rawValue).child(self.currentDate).child(self.pinFie
             
     }
 }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
 }

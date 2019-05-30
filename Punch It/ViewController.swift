@@ -14,7 +14,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var savedPIN:[String] = []
     @IBOutlet weak var myTableView: UITableView!
     
-    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
             myTableView.reloadData()
             performSegue(withIdentifier: SegueName.stop.rawValue, sender: nil)
         }
@@ -43,6 +44,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         })
         
     }
+    
+    //Fetch the user's name
     func fetchUserName(){
         for i in self.savedPIN{
             let ref = Database.database().reference()
