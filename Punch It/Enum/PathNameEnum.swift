@@ -14,4 +14,7 @@ enum pathName: String {
     case accessLog = "AccessLog"
     case login = "Login"
     case logOut = "Logout"
+    case time = "Time"
+    case work = "Work"
+    case name = "Name"
 }

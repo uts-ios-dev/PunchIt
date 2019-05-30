@@ -25,14 +25,12 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
 
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
-//            if (savedHours[indexPath.row] != ""){
-         
-            cell.textLabel?.text = "\(savedName[indexPath.row]) \(savedHours[indexPath.row])"
-//            cell.textLabel?.text = "\(savedHours[indexPath.row]) "
+            if (savedHours[indexPath.row] != ""){
+            cell.textLabel?.text = "\(savedName[indexPath.row]) has worked \(savedHours[indexPath.row])"
             return cell
-//            }
-//            cell.textLabel?.text = "\(savedName[indexPath.row]) has not worked"
-//            return cell
+            }
+            cell.textLabel?.text = "\(savedName[indexPath.row]) has not worked"
+            return cell
         }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,7 +39,7 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Database.database().reference().child("Users").observe(.value, with: {(snapshot) in
+        Database.database().reference().child(pathName.users.rawValue).observe(.value, with: {(snapshot) in
             let ID  = snapshot.value as? [String: AnyObject] ?? [:]
             self.savedPIN = Array(ID.keys)
             self.fetchWorkHours()
@@ -52,9 +50,9 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     func fetchUserName(){
         for i in self.savedPIN{
-           Database.database().reference().child("Users").child(i).observeSingleEvent(of: .value, with: {(snapshot) in
+           Database.database().reference().child(pathName.users.rawValue).child(i).observeSingleEvent(of: .value, with: {(snapshot) in
                 let value = snapshot.value as? NSDictionary
-                let name = value?["Name"] as? String ?? ""
+                let name = value?[pathName.name.rawValue] as? String ?? ""
                 self.savedName.append(name)
                 print(self.savedName)
             })
@@ -62,11 +60,10 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
 
     func fetchWorkHours(){
-        for i in self.savedPIN
-        {
-            Database.database().reference().child("Work").child(date).child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
+        for i in self.savedPIN{
+            Database.database().reference().child(pathName.work.rawValue).child(date).child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
                 let value = snapshot.value as? NSDictionary
-                let time = value?["Time"] as? String ?? ""
+                let time = value?[pathName.time.rawValue] as? String ?? ""
                 self.savedHours.append(time)
                print(self.savedHours)
             })

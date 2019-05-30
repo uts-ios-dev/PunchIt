@@ -27,7 +27,7 @@ class AuthenticationViewController: UIViewController {
     var dictionary:[String:String] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref.child("Users").observe(DataEventType.value, with: {(snapshot) in
+        ref.child(pathName.users.rawValue).observe(DataEventType.value, with: {(snapshot) in
             let ID  = snapshot.value as? [String: AnyObject] ?? [:]
             self.savedPIN = Array(ID.keys)
             self.fetchUserName()
@@ -35,7 +35,7 @@ class AuthenticationViewController: UIViewController {
     }
     
     func dateFormatter(_ : Date){
-        formatterDay.dateFormat = "dd-MM-yyyyHH:mm"
+        formatterDay.dateFormat = dateFormatEnum.dateAndTime.rawValue
         let nowDay  = formatterDay.string(from: Date())
         let index = nowDay.index(nowDay.startIndex, offsetBy: 10)
         let endIndex = nowDay.index(nowDay.endIndex, offsetBy: -5)
@@ -45,13 +45,14 @@ class AuthenticationViewController: UIViewController {
     
     func fetchUserName(){
         for i in self.savedPIN{
-            ref.child("Users").child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
+            ref.child(pathName.users.rawValue).child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
                 let value = snapshot.value as? NSDictionary
-                let name = value?["Name"] as? String ?? ""
+                let name = value?[pathName.name.rawValue] as? String ?? ""
                 self.savedName.append(name)
         })
         }
     }
+    
     func parseIntEndTime(_ time: String){
         let index = time.index(time.startIndex, offsetBy: 2)
         let endIndex = time.index(time.endIndex, offsetBy: -2)
@@ -69,13 +70,13 @@ class AuthenticationViewController: UIViewController {
     @IBOutlet weak var pinField: UITextField!
     fileprivate func validation() {
         getName = dictionary[pinField.text!]
-        ref.child("LiveShift").child(pinField.text!).setValue(["Working": getName])
+        ref.child(pathName.liveShift.rawValue).child(pinField.text!).setValue(["Working": getName])
         dateFormatter(Date())
-        ref.child("AccessLog").child("Login").child(pinField.text!).child(currentDate).setValue(["Time": currentTime])
+    ref.child(pathName.accessLog.rawValue).child(pathName.login.rawValue).child(pinField.text!).child(currentDate).setValue([pathName.time.rawValue: currentTime])
     }
     
     @IBAction func confirmTapped(_ sender: Any) {
-        if pinField.text! == "1111" {
+        if pinField.text! == savedManage {
             performSegue(withIdentifier: SegueName.toManageTask.rawValue, sender: nil)
         }
         for (key, value) in self.savedPIN.enumerated(){
@@ -91,17 +92,17 @@ class AuthenticationViewController: UIViewController {
     }
     
     fileprivate func calculateWorkHour() {
-        ref.child("LiveShift").child(pinField.text!).removeValue()
+        ref.child(pathName.liveShift.rawValue).child(pinField.text!).removeValue()
         dateFormatter(Date())
-        ref.child("AccessLog").child("Logout").child(pinField.text!).child(currentDate).setValue(["Time": currentTime])
-        ref.child("AccessLog").child("Login").child(pinField.text!).child(currentDate).observe(DataEventType.value, with: {(snapshot) in
+    ref.child(pathName.accessLog.rawValue).child(pathName.logOut.rawValue).child(pinField.text!).child(currentDate).setValue([pathName.time.rawValue: currentTime])
+    ref.child(pathName.accessLog.rawValue).child(pathName.login.rawValue).child(pinField.text!).child(currentDate).observe(DataEventType.value, with: {(snapshot) in
             let value  = snapshot.value as? [String: AnyObject] ?? [:]
-            let getLoginTime = value["Time"] as? String ?? ""
+            let getLoginTime = value[pathName.time.rawValue] as? String ?? ""
             self.parseIntLoginTime(getLoginTime)
             self.parseIntEndTime(self.currentTime)
             let workingHour = self.endHours - self.loginHour
             let workingMinutes = abs(self.endMinutes - self.loginMinutes)
-            self.ref.child("Work").child(self.currentDate).child(self.pinField.text!).setValue(["Time": "\(workingHour)h \(workingMinutes)min"])
+self.ref.child(pathName.work.rawValue).child(self.currentDate).child(self.pinField.text!).setValue([pathName.time.rawValue: "\(workingHour)h \(workingMinutes)min"])
         })
     }
     

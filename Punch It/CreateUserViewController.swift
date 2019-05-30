@@ -16,7 +16,8 @@ class CreateUserViewController: UIViewController {
     @IBOutlet weak var role: UITextField!
     var backToManageTask: Bool = false;
  
-   
+    @IBOutlet weak var helperText: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,13 +32,16 @@ class CreateUserViewController: UIViewController {
     }
     
     @IBAction func okay(_ sender: Any) {
+        helperText.text = "Please fill in all the field"
     if (phoneNumber.text! != "" && address.text! != "" && initialPIN.text! != "" && staffName.text! != "" && role.text! != "" ){
         let user = ["Name": staffName.text!,
                     "Address": address.text!,
                     "PhoneNumber": phoneNumber.text!,
                     "Role": role.text!]
-        Database.database().reference().child("Users").child(initialPIN.text!).setValue(user)
+        Database.database().reference().child(pathName.users.rawValue).child(initialPIN.text!).setValue(user)
+        performSegue(withIdentifier: SegueName.success.rawValue, sender: nil)
     }
+   
 }
 
     /*

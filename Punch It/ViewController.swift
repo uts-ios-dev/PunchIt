@@ -14,12 +14,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var savedPIN:[String] = []
     @IBOutlet weak var myTableView: UITableView!
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "endShift"{
-////            let destination = segue.destination as! AuthenticationViewController
-////            destination.screenLabel.text = "End Shift"
-//        }
-//    }
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
             myTableView.reloadData()
             performSegue(withIdentifier: SegueName.stop.rawValue, sender: nil)
@@ -42,7 +36,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         let ref = Database.database().reference()
-        ref.child("LiveShift").observe(DataEventType.value, with: {(snapshot) in
+        ref.child(pathName.liveShift.rawValue).observe(DataEventType.value, with: {(snapshot) in
             let ID  = snapshot.value as? [String: AnyObject] ?? [:]
             self.savedPIN = Array(ID.keys)
             self.fetchUserName()
@@ -52,9 +46,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func fetchUserName(){
         for i in self.savedPIN{
             let ref = Database.database().reference()
-            ref.child("Users").child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
+            ref.child(pathName.users.rawValue).child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
                 let value = snapshot.value as? NSDictionary
-                let name = value?["Name"] as? String ?? ""
+                let name = value?[pathName.name.rawValue] as? String ?? ""
                 self.savedName.append(name)
             })
         }

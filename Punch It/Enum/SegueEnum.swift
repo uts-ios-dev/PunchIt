@@ -16,4 +16,5 @@ enum SegueName: String{
     case confirm = "confirm"
     case stop = "endShift"
     case toManageTask = "manageSegue"
+    case success = "success"
 }
