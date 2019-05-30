@@ -22,12 +22,14 @@ class CreateUserViewController: UIViewController {
 
 //         Do any additional setup after loading the view.
     }
+    
     @IBAction func backButtonTapped(_ sender: Any) {
         if backToManageTask == true {
-            performSegue(withIdentifier: "backManageTask", sender: nil)
+            performSegue(withIdentifier: SegueName.backManageTask.rawValue, sender: nil)
         }
-        performSegue(withIdentifier: "backShiftView", sender: nil)
+        performSegue(withIdentifier: SegueName.toShiftView.rawValue, sender: nil)
     }
+    
     @IBAction func okay(_ sender: Any) {
     if (phoneNumber.text! != "" && address.text! != "" && initialPIN.text! != "" && staffName.text! != "" && role.text! != "" ){
         let user = ["Name": staffName.text!,
@@ -37,12 +39,7 @@ class CreateUserViewController: UIViewController {
         Database.database().reference().child("Users").child(initialPIN.text!).setValue(user)
     }
 }
-//    @IBAction func addStaff(_ sender: Any) {
-//
-//            performSegue(withIdentifier: "success", sender: nil)
-//        }
-//
-//}
+
     /*
     // MARK: - Navigation
 

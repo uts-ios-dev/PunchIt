@@ -76,7 +76,7 @@ class AuthenticationViewController: UIViewController {
     
     @IBAction func confirmTapped(_ sender: Any) {
         if pinField.text! == "1111" {
-            performSegue(withIdentifier: "manageSegue", sender: nil)
+            performSegue(withIdentifier: SegueName.toManageTask.rawValue, sender: nil)
         }
         for (key, value) in self.savedPIN.enumerated(){
             self.dictionary[value] = self.savedName[key]
@@ -84,10 +84,12 @@ class AuthenticationViewController: UIViewController {
         for i in savedPIN{
             if i == pinField.text!{
                 validation()
-                performSegue(withIdentifier: "confirm", sender: nil)
+                performSegue(withIdentifier: SegueName.confirm.rawValue, sender: nil)
             }
         }
+        pinField.placeholder = "Incorrect PIN"
     }
+    
     fileprivate func calculateWorkHour() {
         ref.child("LiveShift").child(pinField.text!).removeValue()
         dateFormatter(Date())
@@ -107,7 +109,7 @@ class AuthenticationViewController: UIViewController {
         for i in savedPIN{
             if i == pinField.text!{
                 calculateWorkHour()
-                performSegue(withIdentifier: "confirm", sender: nil)
+                performSegue(withIdentifier: SegueName.confirm.rawValue, sender: nil)
             }
             
     }

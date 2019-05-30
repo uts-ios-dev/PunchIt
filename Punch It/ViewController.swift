@@ -22,7 +22,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //    }
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
             myTableView.reloadData()
-            performSegue(withIdentifier: "endShift", sender: nil)
+            performSegue(withIdentifier: SegueName.stop.rawValue, sender: nil)
         }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -35,7 +35,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
-        cell.textLabel?.text = savedName[indexPath.row]
+        cell.textLabel?.text = "\(savedName[indexPath.row]) is now working"
         return cell
     }
     
@@ -48,10 +48,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             self.fetchUserName()
         })
         
-//       ref.child("Users").child("13456").setValue(["name": "Trung"])
-       
-      
-        // Do any additional setup after loading the view, typically from a nib.
     }
     func fetchUserName(){
         for i in self.savedPIN{
@@ -63,7 +59,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             })
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
      

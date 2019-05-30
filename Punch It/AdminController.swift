@@ -11,13 +11,15 @@ import FirebaseDatabase
 import FirebaseUI
 
 class AdminController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var date: String = "28-05-2019"
+  
     var savedName = [String]()
     var savedPIN = [String]()
     var savedHours = [String]()
+    var date: String = ""
     @IBOutlet weak var myTableView: UITableView!
+    @IBOutlet weak var dateLabel: UILabel!
     
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return savedName.count
         }
 
@@ -25,8 +27,8 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
             let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
 //            if (savedHours[indexPath.row] != ""){
          
-//            cell.textLabel?.text = "\(savedName[indexPath.row]) worked \(savedHours[indexPath.row])"
-            cell.textLabel?.text = "\(savedName[indexPath.row]) "
+            cell.textLabel?.text = "\(savedName[indexPath.row]) \(savedHours[indexPath.row])"
+//            cell.textLabel?.text = "\(savedHours[indexPath.row]) "
             return cell
 //            }
 //            cell.textLabel?.text = "\(savedName[indexPath.row]) has not worked"
@@ -34,7 +36,7 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
         }
     
     override func viewDidAppear(_ animated: Bool) {
-          myTableView.reloadData()
+        myTableView.reloadData()
         }
     
     override func viewDidLoad() {
@@ -42,10 +44,11 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
         Database.database().reference().child("Users").observe(.value, with: {(snapshot) in
             let ID  = snapshot.value as? [String: AnyObject] ?? [:]
             self.savedPIN = Array(ID.keys)
-            self.fetchUserName()
             self.fetchWorkHours()
+            self.fetchUserName()
         })
-    }
+        dateLabel.text = date
+}
     
     func fetchUserName(){
         for i in self.savedPIN{
@@ -57,7 +60,7 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
             })
         }
     }
-    
+
     func fetchWorkHours(){
         for i in self.savedPIN
         {

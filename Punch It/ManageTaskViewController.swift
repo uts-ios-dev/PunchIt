@@ -20,18 +20,18 @@ class ManageTaskViewController: UIViewController {
         datePicker?.resignFirstResponder()
         if dateField.text == ""{
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd-MM-yyyy"
+            dateFormatter.dateFormat = dateFormatEnum.dateOnly.rawValue
             dateField.text = dateFormatter.string(from: Date())
         }
         // Do any additional setup after loading the view.
     }
     @IBAction func addStaffTapped(_ sender: Any) {
-         performSegue(withIdentifier: "createStaff", sender: nil)
+         performSegue(withIdentifier: SegueName.toCreateStaff.rawValue, sender: nil)
     }
 
     @objc func datePickerValueChanged(_ sender: UIDatePicker){
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
+        dateFormatter.dateFormat = dateFormatEnum.dateOnly.rawValue
         dateField.text = dateFormatter.string(from: sender.date)
         self.view.endEditing(true)
         self.viewWillAppear(true)
@@ -39,19 +39,18 @@ class ManageTaskViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "viewStaffSegue"{
+        if segue.identifier == SegueName.toViewStaff.rawValue{
             let destination = segue.destination as! AdminController
             destination.date = dateField.text!
         }
-        if segue.identifier == "createStaff"{
+        if segue.identifier == SegueName.toCreateStaff.rawValue{
             let landing = segue.destination as! CreateUserViewController
             landing.backToManageTask = true
     }
-    }
-    
-   
+        
+}
     @IBAction func viewTapped(_ sender: Any) {
-        performSegue(withIdentifier: "viewStaffSegue", sender: nil)
+        performSegue(withIdentifier: SegueName.toViewStaff.rawValue, sender: nil)
     }
     
 }
