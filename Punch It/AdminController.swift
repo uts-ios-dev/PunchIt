@@ -15,7 +15,7 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
     var savedName = [String]()
     var savedPIN = [String]()
     var savedHours = [String]()
-    var date: String = "30-05-2019"
+    var date: String = ""
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var dateLabel: UILabel!
     
@@ -25,12 +25,16 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
 
     //Print data to the table 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
-            if (savedHours[indexPath.row] != ""){
-            cell.textLabel?.text = "\(savedName[indexPath.row]) has worked \(savedHours[indexPath.row])"
+            let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cell")
+            cell.textLabel?.font = UIFont(name: fontName.arial.rawValue, size: fontSize.medium.rawValue)
+            cell.detailTextLabel?.font = UIFont(name: fontName.arial.rawValue, size: fontSize.medium.rawValue)
+        if (savedHours[indexPath.row] != ""){
+            cell.textLabel?.text = "\(savedName[indexPath.row])"
+            cell.detailTextLabel?.text = "has worked \(savedHours[indexPath.row])"
             return cell
             }
-            cell.textLabel?.text = "\(savedName[indexPath.row]) has not worked"
+            cell.textLabel?.text = "\(savedName[indexPath.row])"
+            cell.detailTextLabel?.text = "has not worked"
             return cell
         }
     

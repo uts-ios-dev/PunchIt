@@ -15,7 +15,7 @@ class AuthenticationViewController: UIViewController {
     var currentTime: String = ""
     var savedPIN:[String] = []
     var savedName:[String] = []
-    var savedManage = "1111"
+    var adminPIN: [String]  = []
     var getName: String!
     var endHours: Int = 0
     var endMinutes: Int = 0
@@ -32,6 +32,7 @@ class AuthenticationViewController: UIViewController {
             self.savedPIN = Array(ID.keys)
             self.fetchUserName()
         })
+        fetchManagerPIN()
     }
     //Date formatter to convert Date to String
     func dateFormatter(_ : Date){
@@ -41,6 +42,13 @@ class AuthenticationViewController: UIViewController {
         let endIndex = nowDay.index(nowDay.endIndex, offsetBy: -5)
         self.currentDate = String(nowDay[..<index])
         self.currentTime = String(nowDay[endIndex...])
+    }
+    func fetchManagerPIN(){
+        ref.child(pathName.admin.rawValue).observe(DataEventType.value, with: {(snapshot) in
+            let manageID = snapshot.value as? [String:AnyObject] ?? [:]
+            self.adminPIN = Array(manageID.keys)
+            print(self.adminPIN)
+        })
     }
     
     //Fetech the user's name from Firebase
@@ -67,6 +75,7 @@ class AuthenticationViewController: UIViewController {
         let endIndex = time.index(time.endIndex, offsetBy: -2)
         self.loginHour = (String(time[..<index]) as NSString).integerValue
         self.loginMinutes = (String(time[endIndex...]) as NSString).integerValue
+        
     }
     
     //Perform validation for the control the login
@@ -79,21 +88,24 @@ class AuthenticationViewController: UIViewController {
     }
     
     @IBAction func confirmTapped(_ sender: Any) {
-        if pinField.text! == savedManage {
+        //Check if the user logged as admin
+        for pin in adminPIN {
+        if pinField.text! == pin {
             performSegue(withIdentifier: SegueName.toManageTask.rawValue, sender: nil)
         }
+        }
+        //Mapping name and the ID of the logged user
         for (key, value) in self.savedPIN.enumerated(){
             self.dictionary[value] = self.savedName[key]
         }
+        //Check if user logged as staff
         for i in savedPIN{
             if i == pinField.text!{
                 validation()
                 performSegue(withIdentifier: SegueName.confirm.rawValue, sender: nil)
             }
-        }
-        pinField.placeholder = "Incorrect PIN"
     }
-    
+}
     //Calculate work hour based on the end time and the current time
     fileprivate func calculateWorkHour() {
         ref.child(pathName.liveShift.rawValue).child(pinField.text!).removeValue()

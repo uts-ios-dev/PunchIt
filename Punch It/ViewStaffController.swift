@@ -15,7 +15,7 @@ class ViewStaffController: UIViewController, UITableViewDataSource, UITableViewD
     var savedPIN:[String] = []
     @IBOutlet weak var myTableView: UITableView!
     
-    
+    //Set up the table view to view data
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
         myTableView.reloadData()
         performSegue(withIdentifier: SegueName.stop.rawValue, sender: nil)
@@ -30,8 +30,12 @@ class ViewStaffController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
-        cell.textLabel?.text = "\(savedName[indexPath.row]) is working as \(savedRole[indexPath.row])"
+        let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cell")
+        cell.textLabel?.text = "\(savedName[indexPath.row])"
+        cell.detailTextLabel?.text = "is working as \(savedRole[indexPath.row])"
+        cell.textLabel?.font = UIFont(name: fontName.arial.rawValue, size: fontSize.medium.rawValue)
+        cell.detailTextLabel?.font = UIFont(name: fontName.arial.rawValue, size: fontSize.medium.rawValue)
+        
         return cell
     }
     
