@@ -14,9 +14,10 @@ class CreateUserViewController: UIViewController {
     @IBOutlet weak var initialPIN: UITextField!
     @IBOutlet weak var staffName: UITextField!
     @IBOutlet weak var role: UITextField!
-    var backToManageTask: Bool = false;
- 
+    var backToManageTask: Bool = false
+    let form = validatedForm()
     @IBOutlet weak var helperText: UILabel!
+    @IBOutlet weak var createButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,17 +33,14 @@ class CreateUserViewController: UIViewController {
     
     //Function to create new user
     @IBAction func okay(_ sender: Any) {
-        helperText.text = "Please fill in all the field"
-    if (phoneNumber.text! != "" && address.text! != "" && initialPIN.text! != "" && staffName.text! != "" && role.text! != "" ){
-        let user = ["Name": staffName.text!,
-                    "Address": address.text!,
-                    "PhoneNumber": phoneNumber.text!,
-                    "Role": role.text!]
+    //Perform validation for the form before adding new user 
+    if (form.validateForm(helperText, phoneNumber.text!, initialPIN.text!, role.text!, staffName.text!, address.text!)){
+        let user = [pathName.name.rawValue: staffName.text!,
+                    pathName.address.rawValue: address.text!,
+                    pathName.phone.rawValue: phoneNumber.text!,
+                    pathName.role.rawValue: role.text!]
         Database.database().reference().child(pathName.users.rawValue).child(initialPIN.text!).setValue(user)
         performSegue(withIdentifier: SegueName.success.rawValue, sender: nil)
     }
-   
 }
-
-
 }

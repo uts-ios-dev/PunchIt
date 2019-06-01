@@ -60,7 +60,6 @@ class ViewStaffController: UIViewController, UITableViewDataSource, UITableViewD
                 let value = snapshot.value as? NSDictionary
                 let name = value?[pathName.name.rawValue] as? String ?? ""
                 self.savedName.append(name)
-                print(self.savedName)
             })
         }
     }
@@ -71,7 +70,6 @@ class ViewStaffController: UIViewController, UITableViewDataSource, UITableViewD
                 let value = snapshot.value as? NSDictionary
                 let role = value?[pathName.role.rawValue] as? String ?? ""
                 self.savedRole.append(role)
-                print(self.savedRole)
             })
         }
     }

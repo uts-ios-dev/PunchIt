@@ -43,11 +43,11 @@ class AuthenticationViewController: UIViewController {
         self.currentDate = String(nowDay[..<index])
         self.currentTime = String(nowDay[endIndex...])
     }
+    
     func fetchManagerPIN(){
         ref.child(pathName.admin.rawValue).observe(DataEventType.value, with: {(snapshot) in
             let manageID = snapshot.value as? [String:AnyObject] ?? [:]
             self.adminPIN = Array(manageID.keys)
-            print(self.adminPIN)
         })
     }
     

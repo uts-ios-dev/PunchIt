@@ -10,6 +10,9 @@
 		203E6F7622A2569D009AEEA2 /* TextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203E6F7522A2569D009AEEA2 /* TextFieldExtensions.swift */; };
 		203E6F7A22A2608E009AEEA2 /* FontName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203E6F7922A2608E009AEEA2 /* FontName.swift */; };
 		203E6F7C22A26096009AEEA2 /* FontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203E6F7B22A26096009AEEA2 /* FontSize.swift */; };
+		203E6F8022A278B3009AEEA2 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203E6F7F22A278B3009AEEA2 /* ValidationError.swift */; };
+		203E6F8222A27E69009AEEA2 /* ErrorThrows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203E6F8122A27E69009AEEA2 /* ErrorThrows.swift */; };
+		203E6F8422A28506009AEEA2 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203E6F8322A28506009AEEA2 /* ErrorHandling.swift */; };
 		2043D25B2294148100B6D1B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2043D25A2294148100B6D1B5 /* GoogleService-Info.plist */; };
 		2043D2632295039500B6D1B5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2043D2622295039500B6D1B5 /* TabBarController.swift */; };
 		20963930229F4C0B00F14692 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2096392F229F4C0B00F14692 /* Main.storyboard */; };
@@ -55,6 +58,9 @@
 		203E6F7522A2569D009AEEA2 /* TextFieldExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExtensions.swift; sourceTree = "<group>"; };
 		203E6F7922A2608E009AEEA2 /* FontName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontName.swift; sourceTree = "<group>"; };
 		203E6F7B22A26096009AEEA2 /* FontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSize.swift; sourceTree = "<group>"; };
+		203E6F7F22A278B3009AEEA2 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
+		203E6F8122A27E69009AEEA2 /* ErrorThrows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorThrows.swift; sourceTree = "<group>"; };
+		203E6F8322A28506009AEEA2 /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
 		2043D25A2294148100B6D1B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2043D2622295039500B6D1B5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		2096392F229F4C0B00F14692 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../Main.storyboard; sourceTree = "<group>"; };
@@ -121,6 +127,8 @@
 			isa = PBXGroup;
 			children = (
 				203E6F7522A2569D009AEEA2 /* TextFieldExtensions.swift */,
+				203E6F8122A27E69009AEEA2 /* ErrorThrows.swift */,
+				203E6F8322A28506009AEEA2 /* ErrorHandling.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -130,6 +138,7 @@
 			children = (
 				20963932229F762400F14692 /* SegueEnum.swift */,
 				20963934229F772E00F14692 /* DateFormatEnum.swift */,
+				203E6F7F22A278B3009AEEA2 /* ValidationError.swift */,
 				20963936229F8A0B00F14692 /* PathNameEnum.swift */,
 				203E6F7922A2608E009AEEA2 /* FontName.swift */,
 				203E6F7B22A26096009AEEA2 /* FontSize.swift */,
@@ -482,10 +491,13 @@
 				6C05AC4722939D700045EB82 /* ViewController.swift in Sources */,
 				203E6F7C22A26096009AEEA2 /* FontSize.swift in Sources */,
 				20963935229F772E00F14692 /* DateFormatEnum.swift in Sources */,
+				203E6F8222A27E69009AEEA2 /* ErrorThrows.swift in Sources */,
 				20C01BE62298D1B200B9B5B9 /* AuthenticationViewController.swift in Sources */,
 				20963933229F762400F14692 /* SegueEnum.swift in Sources */,
+				203E6F8022A278B3009AEEA2 /* ValidationError.swift in Sources */,
 				2043D2632295039500B6D1B5 /* TabBarController.swift in Sources */,
 				20C01BE0229800A100B9B5B9 /* CreateUserViewController.swift in Sources */,
+				203E6F8422A28506009AEEA2 /* ErrorHandling.swift in Sources */,
 				20EA1523229E9B58009B887A /* ManageTaskViewController.swift in Sources */,
 				203E6F7622A2569D009AEEA2 /* TextFieldExtensions.swift in Sources */,
 				20963937229F8A0B00F14692 /* PathNameEnum.swift in Sources */,
