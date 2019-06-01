@@ -19,7 +19,7 @@ class ManageTaskViewController: UIViewController {
         datePicker?.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
         dateField.inputView = datePicker
         datePicker?.resignFirstResponder()
-        if dateField.text == ""{
+        if dateField.text == stringCompare.blank.rawValue{
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = dateFormatEnum.dateOnly.rawValue
             dateField.text = dateFormatter.string(from: Date())

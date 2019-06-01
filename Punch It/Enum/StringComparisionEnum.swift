@@ -1,5 +1,5 @@
 //
-//  FontSize.swift
+//  StringComparisionEnum.swift
 //  Punch It
 //
 //  Created by Phan Thế Trung on 1/6/19.
@@ -7,9 +7,7 @@
 //
 
 import Foundation
-import UIKit
-enum fontSize: CGFloat{
-    case small = 15
-    case medium = 25
-    case large = 35
+enum stringCompare: String {
+    case blank = ""
+   
 }

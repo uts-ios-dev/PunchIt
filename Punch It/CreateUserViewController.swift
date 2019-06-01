@@ -14,10 +14,10 @@ class CreateUserViewController: UIViewController {
     @IBOutlet weak var initialPIN: UITextField!
     @IBOutlet weak var staffName: UITextField!
     @IBOutlet weak var role: UITextField!
-    var backToManageTask: Bool = false
-    let form = validatedForm()
     @IBOutlet weak var helperText: UILabel!
     @IBOutlet weak var createButton: UIButton!
+    var backToManageTask: Bool = false
+    let form = validatedForm()
     
     override func viewDidLoad() {
         super.viewDidLoad()

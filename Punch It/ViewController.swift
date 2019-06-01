@@ -15,6 +15,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var myTableView: UITableView!
     
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let ref = Database.database().reference()
+        ref.child(pathName.liveShift.rawValue).observe(DataEventType.value, with: {(snapshot) in
+            let ID  = snapshot.value as? [String: AnyObject] ?? [:]
+            self.savedPIN = Array(ID.keys)
+            self.fetchUserName()
+        })
+    }
+    
+    
+    
+    //Initial set up for the table view
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
             myTableView.reloadData()
             performSegue(withIdentifier: SegueName.stop.rawValue, sender: nil)
@@ -34,19 +47,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.detailTextLabel?.text = "is now working"
         cell.textLabel?.font = UIFont(name: fontName.arial.rawValue, size: fontSize.medium.rawValue)
         cell.detailTextLabel?.font = UIFont(name: fontName.arial.rawValue, size: fontSize.medium.rawValue)
-
         return cell
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let ref = Database.database().reference()
-        ref.child(pathName.liveShift.rawValue).observe(DataEventType.value, with: {(snapshot) in
-            let ID  = snapshot.value as? [String: AnyObject] ?? [:]
-            self.savedPIN = Array(ID.keys)
-            self.fetchUserName()
-        })
-        
     }
     
     //Fetch the user's name
@@ -55,7 +56,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let ref = Database.database().reference()
             ref.child(pathName.users.rawValue).child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
                 let value = snapshot.value as? NSDictionary
-                let name = value?[pathName.name.rawValue] as? String ?? ""
+                let name = value?[pathName.name.rawValue] as? String ?? stringCompare.blank.rawValue    
                 self.savedName.append(name)
             })
         }

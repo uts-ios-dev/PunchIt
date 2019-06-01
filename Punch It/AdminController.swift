@@ -12,10 +12,10 @@ import FirebaseUI
 
 class AdminController: UIViewController, UITableViewDataSource, UITableViewDelegate {
   
-    var savedName = [String]()
-    var savedPIN = [String]()
-    var savedHours = [String]()
-    var date: String = ""
+    var savedName: [String] = []
+    var savedPIN: [String] = []
+    var savedHours: [String] = []
+    var date: String = stringCompare.blank.rawValue
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var dateLabel: UILabel!
     
@@ -28,7 +28,7 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
             let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cell")
             cell.textLabel?.font = UIFont(name: fontName.arial.rawValue, size: fontSize.medium.rawValue)
             cell.detailTextLabel?.font = UIFont(name: fontName.arial.rawValue, size: fontSize.medium.rawValue)
-        if (savedHours[indexPath.row] != ""){
+        if (savedHours[indexPath.row] != stringCompare.blank.rawValue){
             cell.textLabel?.text = "\(savedName[indexPath.row])"
             cell.detailTextLabel?.text = "has worked \(savedHours[indexPath.row])"
             return cell
@@ -57,7 +57,7 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
         for i in self.savedPIN{
            Database.database().reference().child(pathName.users.rawValue).child(i).observeSingleEvent(of: .value, with: {(snapshot) in
                 let value = snapshot.value as? NSDictionary
-                let name = value?[pathName.name.rawValue] as? String ?? ""
+                let name = value?[pathName.name.rawValue] as? String ?? stringCompare.blank.rawValue
                 self.savedName.append(name)
             })
         }
@@ -68,7 +68,7 @@ class AdminController: UIViewController, UITableViewDataSource, UITableViewDeleg
         for i in self.savedPIN{
             Database.database().reference().child(pathName.work.rawValue).child(date).child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
                 let value = snapshot.value as? NSDictionary
-                let time = value?[pathName.time.rawValue] as? String ?? ""
+                let time = value?[pathName.time.rawValue] as? String ?? stringCompare.blank.rawValue
                 self.savedHours.append(time)
             })
         }

@@ -12,7 +12,7 @@ class formValidation {
         guard Int(phoneNum) != nil else{
             throw validationError.invalidPhoneNumFormat
         }
-        guard phoneNum != "" else{
+        guard phoneNum != stringCompare.blank.rawValue else{
             throw validationError.missingInput
         }
     }
@@ -20,12 +20,12 @@ class formValidation {
         guard Int(pinNum) != nil else{
             throw validationError.invalidPINFormat
         }
-        guard pinNum != "" else{
+        guard pinNum != stringCompare.blank.rawValue else{
             throw validationError.missingInput
         }
     }
     func otherInfoValid(_ text: String) throws {
-        guard text != "" else{
+        guard text != stringCompare.blank.rawValue else{
             throw validationError.missingInput
         }
     }

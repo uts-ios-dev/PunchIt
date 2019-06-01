@@ -19,4 +19,11 @@ enum pathName: String {
     case name = "Name"
     case role = "Role"
     case admin = "Admin"
+    case address = "Address"
+    case phone = "PhoneNumber"
+    case inWork = "Working"
+    case toLogOut = "AccessLog/Logout"
+    case toLogIn = "AccessLog/Login"
+    
+    
 }

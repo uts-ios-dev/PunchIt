@@ -11,8 +11,8 @@ import FirebaseUI
 import FirebaseDatabase
 class AuthenticationViewController: UIViewController {
     let formatterDay = DateFormatter()
-    var currentDate: String = ""
-    var currentTime: String = ""
+    var currentDate: String = stringCompare.blank.rawValue
+    var currentTime: String = stringCompare.blank.rawValue
     var savedPIN:[String] = []
     var savedName:[String] = []
     var adminPIN: [String]  = []
@@ -24,7 +24,6 @@ class AuthenticationViewController: UIViewController {
     let ref = Database.database().reference()
     var dictionary:[String:String] = [:]
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         ref.child(pathName.users.rawValue).observe(DataEventType.value, with: {(snapshot) in
@@ -34,6 +33,7 @@ class AuthenticationViewController: UIViewController {
         })
         fetchManagerPIN()
     }
+    
     //Date formatter to convert Date to String
     func dateFormatter(_ : Date){
         formatterDay.dateFormat = dateFormatEnum.dateAndTime.rawValue
@@ -43,7 +43,7 @@ class AuthenticationViewController: UIViewController {
         self.currentDate = String(nowDay[..<index])
         self.currentTime = String(nowDay[endIndex...])
     }
-    
+    //Fetch the PIN of the maanger from Firebase
     func fetchManagerPIN(){
         ref.child(pathName.admin.rawValue).observe(DataEventType.value, with: {(snapshot) in
             let manageID = snapshot.value as? [String:AnyObject] ?? [:]
@@ -51,12 +51,12 @@ class AuthenticationViewController: UIViewController {
         })
     }
     
-    //Fetech the user's name from Firebase
+    //Fetch the user's name from Firebase
     func fetchUserName(){
         for i in self.savedPIN{
             ref.child(pathName.users.rawValue).child(i).observeSingleEvent(of: DataEventType.value, with: {(snapshot) in
                 let value = snapshot.value as? NSDictionary
-                let name = value?[pathName.name.rawValue] as? String ?? ""
+                let name = value?[pathName.name.rawValue] as? String ?? stringCompare.blank.rawValue
                 self.savedName.append(name)
         })
         }
@@ -82,7 +82,7 @@ class AuthenticationViewController: UIViewController {
     @IBOutlet weak var pinField: UITextField!
     fileprivate func validation() {
         getName = dictionary[pinField.text!]
-        ref.child(pathName.liveShift.rawValue).child(pinField.text!).setValue(["Working": getName])
+        ref.child(pathName.liveShift.rawValue).child(pinField.text!).setValue([pathName.inWork.rawValue: getName])
         dateFormatter(Date())
     ref.child(pathName.accessLog.rawValue).child(pathName.login.rawValue).child(pinField.text!).child(currentDate).setValue([pathName.time.rawValue: currentTime])
     }
@@ -108,16 +108,20 @@ class AuthenticationViewController: UIViewController {
 }
     //Calculate work hour based on the end time and the current time
     fileprivate func calculateWorkHour() {
-        ref.child(pathName.liveShift.rawValue).child(pinField.text!).removeValue()
+        //Remove the staff from doing the current shift in Firebase
+ref.child(pathName.liveShift.rawValue).child(pinField.text!).removeValue()
         dateFormatter(Date())
-    ref.child(pathName.accessLog.rawValue).child(pathName.logOut.rawValue).child(pinField.text!).child(currentDate).setValue([pathName.time.rawValue: currentTime])
-    ref.child(pathName.accessLog.rawValue).child(pathName.login.rawValue).child(pinField.text!).child(currentDate).observe(DataEventType.value, with: {(snapshot) in
+        //Save the endtime of staff to Firebase
+ref.child(pathName.toLogOut.rawValue).child(pinField.text!).child(currentDate).setValue([pathName.time.rawValue: currentTime])
+        //Get the start time of staff from Firebase to perform caculate working hour
+ref.child(pathName.toLogIn.rawValue).child(pinField.text!).child(currentDate).observe(DataEventType.value, with: {(snapshot) in
             let value  = snapshot.value as? [String: AnyObject] ?? [:]
-            let getLoginTime = value[pathName.time.rawValue] as? String ?? ""
+            let getLoginTime = value[pathName.time.rawValue] as? String ?? stringCompare.blank.rawValue
             self.parseIntLoginTime(getLoginTime)
             self.parseIntEndTime(self.currentTime)
             let workingHour = self.endHours - self.loginHour
             let workingMinutes = abs(self.endMinutes - self.loginMinutes)
+    //Save the working hour to the database
 self.ref.child(pathName.work.rawValue).child(self.currentDate).child(self.pinField.text!).setValue([pathName.time.rawValue: "\(workingHour)h \(workingMinutes)min"])
         })
     }
